@@ -6,8 +6,9 @@ export async function createUser(req: Request, res: Response) {
 
     const user: IUser = req.body
 
+    await authServices.findUserByEmail(user.email)
     await authServices.insertUser(user)
 
-    res.status(201).send("User Vreated!")
+    res.status(201).send("User Created!")
 
 }
