@@ -1,18 +1,28 @@
 import "express-async-errors";
 import dotenv from "dotenv";
 import cryptr from "cryptr";
-import { ICredentials, ICredentialsBodyReq } from "../types/utilTypes";
 import * as credentialRepository from "../repositories/credentialRepository";
+import { Credentials } from "@prisma/client";
+import {
+    ICredentials,
+    ICredentialsBodyReq,
+    ICredentialsFindWithUserId
+} from "../types/utilTypes";
+
 
 dotenv.config();
 
-export async function insertCredential(credential: ICredentialsBodyReq, userId: number) {
+async function encryptPassword(credential: ICredentialsBodyReq) {
 
     const encryptCryptr = new cryptr(String(process.env.CRYPTR_KEY));
-
     const encryptedPassword: string = encryptCryptr.encrypt(credential.password)
 
     credential.password = encryptedPassword;
+}
+
+export async function insertCredential(credential: ICredentialsBodyReq, userId: number) {
+
+    await encryptPassword(credential)
 
     const payload: ICredentials = { ...credential, userId };
 
@@ -22,8 +32,24 @@ export async function insertCredential(credential: ICredentialsBodyReq, userId: 
 
 export async function findCredentialByUrl(credential: ICredentialsBodyReq, userId: number) {
 
-    const payload: ICredentials = { ...credential, userId };
+    const payload: ICredentialsFindWithUserId = {
+        url: credential.url,
+        authorName: credential.authorName,
+        title: credential.title,
+        credentialName: credential.credentialName,
+        label: credential.label,
+        userId
+    };
 
-    return await credentialRepository.findCredential(payload);
+    const credentials: Credentials[] = await credentialRepository.findCredential(payload)
+
+    if (credentials.length) {
+        throw {
+            code: "Conflict",
+            message: "Erro usuário tentando cadastrar duas credenciais iguais"
+        }
+    }
+
+    return credentials[0];
 
 }

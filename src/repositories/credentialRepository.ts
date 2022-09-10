@@ -1,6 +1,5 @@
-import { ICredentials } from "../types/utilTypes";
+import { ICredentials, ICredentialsFind } from "../types/utilTypes";
 import { prisma } from "../config/database";
-import { Credentials } from "@prisma/client";
 
 export async function insertCredential(credential: ICredentials) {
 
@@ -8,7 +7,9 @@ export async function insertCredential(credential: ICredentials) {
 
 }
 
-export async function findCredential(credential: ICredentials ) {
+export async function findCredential(credential: ICredentialsFind ) {
+
+    console.log(await prisma.credentials.findMany({ where: credential }))
 
     return await prisma.credentials.findMany({ where: credential })
 

@@ -7,8 +7,7 @@ export async function createCredential(req: Request, res: Response) {
     const credential: ICredentialsBodyReq = req.body;
     const { verified } = res.locals;
 
-    const credentialUser = await credentialServices.findCredentialByUrl(credential, verified.id);
-
+    await credentialServices.findCredentialByUrl(credential, verified.id);
     await credentialServices.insertCredential(credential, verified.id);
 
     res.status(201).send("Credential Created!");
