@@ -61,3 +61,11 @@ export async function findCredentialById(id: number) {
     return credentials;
 
 }
+
+export async function findCredentialByUserId(userId: number) {
+
+    const credentials: Credentials[] = await credentialRepository.findCredentialByUserId(userId);
+
+    return credentials;
+
+}

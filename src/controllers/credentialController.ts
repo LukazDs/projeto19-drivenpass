@@ -15,6 +15,16 @@ export async function createCredential(req: Request, res: Response) {
 
 }
 
+export async function getCredentialUser(_req: Request, res: Response) {
+
+    const { verified } = res.locals;
+
+    const credentials: Credentials[] = await credentialServices.findCredentialByUserId(verified.id);
+
+    res.status(200).send(credentials);
+
+}
+
 export async function getCredentialById(req: Request, res: Response) {
 
     const id: number = Number(req.params.id);
