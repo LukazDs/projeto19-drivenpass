@@ -33,6 +33,10 @@ export async function findUserByEmailAndPassword(user: IUser) {
 
     const register = await authRepository.findUserByEmail(user.email);
 
+    if (!register) {
+        throw { code: "Unauthorized", message: "Email ou password inválidos!" }
+    }
+
     if (!bcrypt.compareSync(user.password, register?.password as string)) {
 
         throw { code: "Unauthorized", message: "Email ou password inválidos!" }
