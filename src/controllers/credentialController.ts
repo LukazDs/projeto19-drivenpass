@@ -1,4 +1,4 @@
-import { Credentials } from "@prisma/client";
+import { verify } from "crypto";
 import { Request, Response } from "express";
 import * as credentialServices from "../services/credentialServices";
 import { ICredentialsBodyReq } from "../types/utilTypes";
@@ -35,5 +35,17 @@ export async function getCredentialById(req: Request, res: Response) {
     const credentials = await credentialServices.findCredentialById(id, verified.id);
 
     res.status(200).send(credentials);
+
+}
+
+export async function deleteCredential(req: Request, res: Response) {
+
+    const id: number = Number(req.params.id);
+    const { verified } = res.locals;
+
+    await credentialServices.findCredentialById(id, verified.id)
+    await credentialServices.deleteCredentialById(id, verified.id );
+
+    res.status(200).send("Credencial deletada com sucesso!");
 
 }

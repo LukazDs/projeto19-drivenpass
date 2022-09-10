@@ -85,3 +85,15 @@ export async function findCredentialByUserId(userId: number) {
     return credentials;
 
 }
+
+export async function deleteCredentialById(id: number, userId: number) {
+
+    const credentials: Credentials[] = await credentialRepository.findCredentialById(id, userId)
+
+    if (!credentials.length) {
+        throw { code: "NotFound", message: "Credencial não encontrada!" }
+    }
+
+    await credentialRepository.deleteCredentialById(id);
+
+}
