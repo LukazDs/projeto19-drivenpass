@@ -7,10 +7,20 @@ export async function insertCredential(credential: ICredentials) {
 
 }
 
-export async function findCredential(credential: ICredentialsFind ) {
-
-    console.log(await prisma.credentials.findMany({ where: credential }))
+export async function findCredential(credential: ICredentialsFind) {
 
     return await prisma.credentials.findMany({ where: credential })
+
+}
+
+export async function findCredentialById(id: number, userId: number) {
+
+    return await prisma.credentials.findMany({ where: { id, userId } })
+
+}
+
+export async function findCredentialByUserId(userId: number) {
+
+    return await prisma.credentials.findMany({ where: { userId } })
 
 }

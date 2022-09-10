@@ -1,7 +1,7 @@
 import joi from "joi";
-import { ICredentials } from "../types/utilTypes";
+import { ICredentialsBodyReq } from "../types/utilTypes";
 
-const credentialSchema = joi.object<ICredentials>({
+const credentialSchema = joi.object<ICredentialsBodyReq>({
     url: joi.string().uri().required(),
     authorName: joi.string().required(),
     password: joi.string().min(10).required(),

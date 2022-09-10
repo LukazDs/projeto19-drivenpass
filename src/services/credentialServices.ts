@@ -20,6 +20,15 @@ async function encryptPassword(credential: ICredentialsBodyReq) {
     credential.password = encryptedPassword;
 }
 
+function desencryptPassword(password: string) {
+
+    const encryptCryptr = new cryptr(String(process.env.CRYPTR_KEY));
+    const passwordDescrypt: string = encryptCryptr.decrypt(password)
+
+    return passwordDescrypt;
+}
+
+
 export async function insertCredential(credential: ICredentialsBodyReq, userId: number) {
 
     await encryptPassword(credential)
@@ -51,5 +60,28 @@ export async function findCredentialByUrl(credential: ICredentialsBodyReq, userI
     }
 
     return credentials[0];
+
+}
+
+export async function findCredentialById(id: number, userId: number) {
+
+    const credentials: Credentials[] = await credentialRepository.findCredentialById(id, userId);
+
+    if (!credentials.length) {
+        throw { code: "NotFound", message: "Credencial não encontrada!" }
+    }
+
+    credentials.map(v => { v.password = String(desencryptPassword(v.password)) })
+
+    return credentials[0];
+
+}
+
+export async function findCredentialByUserId(userId: number) {
+
+    const credentials: Credentials[] = await credentialRepository.findCredentialByUserId(userId);
+    credentials.map(v => v.password = String(desencryptPassword(v.password)))
+
+    return credentials;
 
 }
