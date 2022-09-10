@@ -53,3 +53,11 @@ export async function findCredentialByUrl(credential: ICredentialsBodyReq, userI
     return credentials[0];
 
 }
+
+export async function findCredentialById(id: number) {
+
+    const credentials: Credentials[] = await credentialRepository.findCredentialById(id);
+
+    return credentials;
+
+}

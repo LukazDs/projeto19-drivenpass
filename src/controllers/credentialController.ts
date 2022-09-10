@@ -1,3 +1,4 @@
+import { Credentials } from "@prisma/client";
 import { Request, Response } from "express";
 import * as credentialServices from "../services/credentialServices";
 import { ICredentialsBodyReq } from "../types/utilTypes";
@@ -11,5 +12,15 @@ export async function createCredential(req: Request, res: Response) {
     await credentialServices.insertCredential(credential, verified.id);
 
     res.status(201).send("Credential Created!");
+
+}
+
+export async function getCredentialById(req: Request, res: Response) {
+
+    const id: number = Number(req.params.id);
+
+    const credentials: Credentials[] = await credentialServices.findCredentialById(id);
+
+    res.status(200).send(credentials);
 
 }
