@@ -3,6 +3,7 @@ import dotenv from "dotenv";
 import bcrypt from "bcrypt";
 import * as authRepository from "../repositories/authRepository"
 import { IUser } from "../types/utilTypes";
+import { Users } from "@prisma/client";
 
 dotenv.config()
 
@@ -23,6 +24,18 @@ export async function findUserByEmail(email: string) {
 
     if (user) {
         throw { code: "Conflict", "message": "Usuário já Cadastrado!" }
+    }
+
+}
+
+export async function findUserByEmailAndPassword(user: IUser) {
+
+    const register = await authRepository.findUserByEmail(user.email);
+
+    if(!bcrypt.compareSync(user.password, register?.password as string)) {
+
+        throw {code: "Unauthorized", message:"Email ou password inválidos!"}
+
     }
 
 }
