@@ -28,7 +28,6 @@ function desencryptPassword(password: string) {
     return passwordDescrypt;
 }
 
-
 export async function insertCredential(credential: ICredentialsBodyReq, userId: number) {
 
     await encryptPassword(credential)

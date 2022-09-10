@@ -5,15 +5,17 @@ import dotenv from "dotenv";
 import { authRouter } from "./routes/authRouter";
 import errorHandler from "./middlewares/errorHandler";
 import { credentialRouter } from "./routes/credentialRouter";
+import { noteRouter } from "./routes/noteRouter";
 
 dotenv.config();
 
 const app = express();
 app.use(express.json(), cors());
 
-app.use(authRouter)
-app.use(credentialRouter)
-app.use(errorHandler)
+app.use(authRouter);
+app.use(credentialRouter);
+app.use(noteRouter);
+app.use(errorHandler);
 
 const PORT: number = Number(process.env.PORT) || 5000;
 
