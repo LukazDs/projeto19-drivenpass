@@ -17,8 +17,9 @@ export async function signInUser(req: Request, res: Response) {
 
     const user: IUser = req.body
 
-    await authServices.findUserByEmailAndPassword(user)
+    const register = await authServices.findUserByEmailAndPassword(user)
+    const token: string = await authServices.getToken(register)
 
-    res.status(201).send("User Created!")
+    res.status(201).send({ token })
 
 }

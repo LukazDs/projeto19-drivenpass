@@ -1,7 +1,8 @@
 import "express-async-errors";
 import dotenv from "dotenv";
 import bcrypt from "bcrypt";
-import * as authRepository from "../repositories/authRepository"
+import jwt from "jsonwebtoken";
+import * as authRepository from "../repositories/authRepository";
 import { IUser } from "../types/utilTypes";
 import { Users } from "@prisma/client";
 
@@ -32,11 +33,24 @@ export async function findUserByEmailAndPassword(user: IUser) {
 
     const register = await authRepository.findUserByEmail(user.email);
 
-    if(!bcrypt.compareSync(user.password, register?.password as string)) {
+    if (!bcrypt.compareSync(user.password, register?.password as string)) {
 
-        throw {code: "Unauthorized", message:"Email ou password inválidos!"}
+        throw { code: "Unauthorized", message: "Email ou password inválidos!" }
 
     }
 
+    return <Users>register;
+
 }
 
+
+export async function getToken(user: Users) {
+
+    const JWT_PASSWORD: string = String(process.env.JWT_KEY);
+    const TIME: string = String(process.env.JWT_TIME)
+
+    const token: string = jwt.sign(user, JWT_PASSWORD, { expiresIn: TIME });
+
+    return token;
+
+}
