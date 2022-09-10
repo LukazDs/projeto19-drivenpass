@@ -6,6 +6,10 @@ const errorHandler: ErrorRequestHandler = (err, _req, res, _next) => {
         return res.status(409).send(err.message)
     }
 
+    if (err.code === "Unauthorized") {
+        return res.status(401).send(err.message)
+    }
+
     return res.sendStatus(500)
 
 };
