@@ -1,13 +1,16 @@
 import { Request, Response } from "express";
 import * as credentialServices from "../services/credentialServices";
-import { ICredentials } from "../types/utilTypes";
+import { ICredentials, ICredentialsBodyReq } from "../types/utilTypes";
 
 export async function createCredential(req: Request, res: Response) {
 
-    const credential: ICredentials = req.body
+    const credential: ICredentialsBodyReq = req.body;
+    const { verified } = res.locals;
 
-    // await authServices.findUserByEmail(user.email)
-    await credentialServices.insertCredential(credential)
+    const payload: ICredentials = { ...credential, userId: verified.id };
+
+    await credentialServices.findCredentialByUrl(payload)
+    await credentialServices.insertCredential(payload);
 
     res.status(201).send("Credential Created!");
 

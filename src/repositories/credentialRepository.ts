@@ -1,6 +1,6 @@
 import { ICredentials } from "../types/utilTypes";
 import { prisma } from "../config/database";
-import { Users } from "@prisma/client";
+import { Credentials } from "@prisma/client";
 
 export async function insertCredential(credential: ICredentials) {
 
@@ -8,8 +8,8 @@ export async function insertCredential(credential: ICredentials) {
 
 }
 
-export async function findUserByEmail(email: string) {
+export async function findCredential(credential: ICredentials ) {
 
-    return <Users>await prisma.users.findUnique({ where: { email } })
+    return await prisma.credentials.findMany({ where: credential })
 
 }
