@@ -8,11 +8,6 @@ dotenv.config()
 
 export async function insertUser(user: IUser) {
 
-    //precisar do password
-
-    //criptografar o password
-
-
     const digits = Number(process.env.PASSWORD_DIGIT_BCRYPT);
     const passwordHash = bcrypt.hashSync(user.password, digits);
 
