@@ -1,9 +1,9 @@
 import joi from "joi";
-import { INoteBodyReq, IUser } from "../types/utilTypes";
+import { INoteBodyReq } from "../types/utilTypes";
 
 const noteSchema = joi.object<INoteBodyReq>({
-    title: joi.string().required(),
-    annotation: joi.string().min(10).required()
+    title: joi.string().max(50).required(),
+    annotation: joi.string().max(1000).required()
 })
 
-export default userSchema;
+export default noteSchema;
