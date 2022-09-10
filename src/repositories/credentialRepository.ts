@@ -13,9 +13,9 @@ export async function findCredential(credential: ICredentialsFind) {
 
 }
 
-export async function findCredentialById(id: number) {
+export async function findCredentialById(id: number, userId: number) {
 
-    return await prisma.credentials.findMany({ where: { id } })
+    return await prisma.credentials.findMany({ where: { id, userId } })
 
 }
 

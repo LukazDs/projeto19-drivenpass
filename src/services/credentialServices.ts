@@ -54,9 +54,13 @@ export async function findCredentialByUrl(credential: ICredentialsBodyReq, userI
 
 }
 
-export async function findCredentialById(id: number) {
+export async function findCredentialById(id: number, userId: number) {
 
-    const credentials: Credentials[] = await credentialRepository.findCredentialById(id);
+    const credentials: Credentials[] = await credentialRepository.findCredentialById(id, userId);
+
+    if (!credentials.length) {
+        throw { code: "NotFound", message: "Credencial não encontrada!" }
+    }
 
     return credentials;
 

@@ -10,6 +10,10 @@ const errorHandler: ErrorRequestHandler = (err, _req, res, _next) => {
         return res.status(401).send(err.message)
     }
 
+    if (err.code === "NotFound") {
+        return res.status(404).send(err.message)
+    }
+
     return res.sendStatus(500)
 
 };
