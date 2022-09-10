@@ -1,4 +1,3 @@
-import { verify } from "crypto";
 import { Request, Response } from "express";
 import * as credentialServices from "../services/credentialServices";
 import { ICredentialsBodyReq } from "../types/utilTypes";

@@ -7,4 +7,4 @@ export type ICredentialsFind = Omit<ICredentialsBodyReq, "password">;
 export type ICredentialsFindWithUserId = Omit<ICredentials, "password">;
 
 export type INote = Omit<Notes, "id">;
-export type INoteBodyReq  = Omit<Notes, "userId">;
+export type INoteBodyReq  = Omit<INote, "userId">;
