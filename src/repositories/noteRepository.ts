@@ -12,3 +12,9 @@ export async function findNote(note: INote) {
     return await prisma.notes.findMany({ where: note })
 
 }
+
+export async function findNoteById(userId: number, id: number) {
+
+    return await prisma.notes.findMany({ where: { userId, id } })
+
+}
