@@ -18,8 +18,6 @@ export async function getCredentialUser(_req: Request, res: Response) {
 
     const { verified } = res.locals;
 
-    console.log(verified)
-
     const credentials = await credentialServices.findCredentialByUserId(verified.id);
 
     res.status(200).send(credentials);
