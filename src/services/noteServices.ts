@@ -15,6 +15,12 @@ export async function insertNote(note: INoteBodyReq, userId: number) {
 
 }
 
+export async function findNoteByUserId(userId: number) {
+
+    return await noteRepository.findNoteByUserId(userId);
+
+}
+
 export async function findNoteUserById(userId: number, id: number) {
 
     const notes = await noteRepository.findNoteById(userId, id);

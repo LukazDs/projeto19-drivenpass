@@ -13,6 +13,16 @@ export async function createNote(req: Request, res: Response) {
 
 }
 
+export async function getNoteUser(_req: Request, res: Response) {
+
+    const { verified } = res.locals;
+
+    const notes = await noteServices.findNoteByUserId(verified.id);
+
+    res.status(200).send(notes);
+
+}
+
 export async function getNoteUserById(req: Request, res: Response) {
 
     const id: number = Number(req.params.id)
