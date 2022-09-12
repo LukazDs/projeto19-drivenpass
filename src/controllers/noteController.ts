@@ -33,3 +33,14 @@ export async function getNoteUserById(req: Request, res: Response) {
     res.status(200).send(notes);
 
 }
+
+export async function deleteNote(req: Request, res: Response) {
+
+    const id: number = Number(req.params.id);
+    const { verified } = res.locals;
+
+    await noteServices.deleteNoteById(id, verified.id );
+
+    res.status(200).send("Nota deletada com sucesso!");
+
+}
