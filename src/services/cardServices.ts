@@ -54,3 +54,10 @@ export async function findCardUserById(userId: number, id: number) {
     return cards[0];
 
 }
+
+export async function deleteCardUserById(id: number, userId: number) {
+
+    await findCardUserById(userId, id);
+    await cardRepository.deleteCardUserById(id);
+
+}

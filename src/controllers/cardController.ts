@@ -33,3 +33,14 @@ export async function getCardUserById(req: Request, res: Response) {
     res.status(200).send(cards);
 
 }
+
+export async function deleteCard(req: Request, res: Response) {
+
+    const id: number = Number(req.params.id);
+    const { verified } = res.locals;
+
+    await cardServices.deleteCardUserById(id, verified.id);
+
+    res.status(200).send("Cartão deletado com sucesso!");
+
+}
