@@ -22,3 +22,9 @@ export async function insertWifi(wifi: IWifiBodyReq, userId: number) {
     await wifiRepository.insertWifi(payload);
 
 }
+
+export async function findWifiByUserId(userId: number) {
+
+    return await wifiRepository.findWifiByUserId(userId);
+
+}

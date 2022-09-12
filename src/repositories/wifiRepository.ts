@@ -9,6 +9,12 @@ export async function insertWifi(wifi: IWifi) {
 
 export async function findWifi(wifi: IWifi) {
 
-    return await prisma.wifis.findMany({ where: wifi })
+    return await prisma.wifis.findMany({ where: wifi });
+
+}
+
+export async function findWifiByUserId(userId: number) {
+
+    return await prisma.wifis.findMany({ where: { userId } });
 
 }
