@@ -28,7 +28,7 @@ export async function getCardUserById(req: Request, res: Response) {
     const { verified } = res.locals;
     const id: number = Number(req.params.id)
 
-    const cards = await cardServices.findCardUserById(id, verified.id);
+    const cards = await cardServices.findCardUserById(verified.id, id);
 
     res.status(200).send(cards);
 

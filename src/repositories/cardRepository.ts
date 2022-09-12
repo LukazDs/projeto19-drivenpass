@@ -18,3 +18,9 @@ export async function findCardByUserId(userId: number) {
     return await prisma.cards.findMany({ where: { userId } })
 
 }
+
+export async function findCardUserById(userId: number, id: number) {
+
+    return await prisma.cards.findMany({ where: { userId, id } })
+
+}

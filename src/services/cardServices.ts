@@ -42,3 +42,15 @@ export async function findCardByUserId(userId: number) {
     return await cardRepository.findCardByUserId(userId);
 
 }
+
+export async function findCardUserById(userId: number, id: number) {
+
+    const cards = await cardRepository.findCardUserById(userId, id);
+
+    if (!cards.length) {
+        throw { code: "NotFound", message: "Cartão não encontrado!" }
+    }
+
+    return cards[0];
+
+}
