@@ -11,6 +11,6 @@ export async function validateWifiBody(req: Request, res: Response, next: NextFu
 
     }
 
-    next()
+    next();
 
 };
