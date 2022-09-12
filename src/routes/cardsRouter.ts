@@ -1,7 +1,8 @@
 import { Router } from "express";
 import { validateCardBody } from "../middlewares/validateCardSchema";
 import validateToken from "../middlewares/validateToken";
+import { insertCard } from "../controllers/cardController";
 
-export const noteRouter = Router();
+export const cardRouter = Router();
 
-noteRouter.post("/cards", validateToken, validateCardBody);
+cardRouter.post("/cards", validateToken, validateCardBody, insertCard);
