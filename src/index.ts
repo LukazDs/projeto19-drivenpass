@@ -8,6 +8,7 @@ import errorHandler from "./middlewares/errorHandler";
 import { credentialRouter } from "./routes/credentialRouter";
 import { noteRouter } from "./routes/noteRouter";
 import { cardRouter } from "./routes/cardsRouter";
+import { wifiRouter } from "./routes/wifiRouter";
 
 dotenv.config();
 
@@ -19,6 +20,7 @@ app.use(authRouter);
 app.use(credentialRouter);
 app.use(cardRouter);
 app.use(noteRouter);
+app.use(wifiRouter);
 
 app.use(errorHandler);
 
