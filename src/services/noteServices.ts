@@ -32,3 +32,10 @@ export async function findNoteUserById(userId: number, id: number) {
     return notes[0];
 
 }
+
+export async function deleteNoteById(id: number, userId: number) {
+
+    await findNoteUserById(userId, id);
+    await noteRepository.deleteNoteUserById(id);
+
+}
