@@ -13,14 +13,6 @@ async function encryptPassword(card: ICard) {
     card.password = encryptedPassword;
 }
 
-function desencryptPassword(password: string) {
-
-    const encryptCryptr = new cryptr(String(process.env.CRYPTR_KEY));
-    const passwordDescrypt: string = encryptCryptr.decrypt(password)
-
-    return passwordDescrypt;
-}
-
 export async function insertCard(card: ICardBodyReq, userId: number) {
 
     const payload: ICard = { ...card, userId };
