@@ -1,13 +1,11 @@
 import { Router } from "express";
-import { createCredential, getCredentialById, getCredentialUser, deleteCredential } from "../controllers/credentialController";
+import * as credentialController from "../controllers/credentialController";
 import { validateCredentialBody } from "../middlewares/validateCredentialSchema";
 import validateToken from "../middlewares/validateToken";
 
-
 export const credentialRouter = Router();
 
-credentialRouter.post("/create-credential", validateToken, validateCredentialBody, createCredential);
-credentialRouter.get("/credential/:id/user", validateToken, getCredentialById);
-credentialRouter.get("/credential/user", validateToken, getCredentialUser);
-credentialRouter.delete("/credential/:id/user", validateToken, deleteCredential);
-
+credentialRouter.post("/credential/create", validateToken, validateCredentialBody, credentialController.createCredential);
+credentialRouter.get("/credential/:id", validateToken, credentialController.getCredentialById);
+credentialRouter.get("/credential", validateToken, credentialController.getCredentialUser);
+credentialRouter.delete("/credential/:id", validateToken, credentialController.deleteCredential);

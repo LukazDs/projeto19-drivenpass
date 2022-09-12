@@ -1,3 +1,4 @@
+import { Cards } from "@prisma/client";
 import { prisma } from "../config/database";
 import { ICard } from "../types/utilTypes";
 
@@ -15,18 +16,18 @@ export async function findCard(card: ICard) {
 
 export async function findCardByUserId(userId: number) {
 
-    return await prisma.cards.findMany({ where: { userId } })
+    return <Cards[]>await prisma.cards.findMany({ where: { userId } })
 
 }
 
 export async function findCardUserById(userId: number, id: number) {
 
-    return await prisma.cards.findMany({ where: { userId, id } })
+    return <Cards[]>await prisma.cards.findMany({ where: { userId, id } })
 
 }
 
 export async function deleteCardUserById(id: number) {
 
-    return await prisma.cards.delete({ where: { id } })
+    await prisma.cards.delete({ where: { id } })
 
 }

@@ -1,8 +1,8 @@
 import { Router } from "express";
-import { createUser, subscribeUser} from "../controllers/authController";
+import * as authController from "../controllers/authController";
 import { validateUserBody } from "../middlewares/validateUserSchema";
 
 export const authRouter = Router();
 
-authRouter.post("/create-user", validateUserBody, createUser);
-authRouter.post("/signin", validateUserBody, subscribeUser);
+authRouter.post("/user/create", validateUserBody, authController.createUser);
+authRouter.post("/user/signin", validateUserBody, authController.subscribeUser);

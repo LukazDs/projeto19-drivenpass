@@ -9,8 +9,11 @@ const cardSchema = joi.object<ICardBodyReq>({
     password: joi.string().required(),
     isVirtual: joi.bool().required(),
     typeCard: joi.string().valid(Role.Credito, Role.Debito, Role.CreditoDebito).required(),
-    expirationDate: joi.date().required()
-    
+    expirationDate: joi.date().required(),
+    title: joi.string().required(),
+    label: joi.string().required(),
+    name: joi.string().required()
+
 })
 
 export default cardSchema;

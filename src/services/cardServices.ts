@@ -2,6 +2,7 @@ import dotenv from "dotenv";
 import cryptr from "cryptr";
 import { ICard, ICardBodyReq } from "../types/utilTypes";
 import * as cardRepository from "../repositories/cardRepository";
+import { Cards } from "@prisma/client";
 
 dotenv.config();
 
@@ -37,13 +38,13 @@ export async function findCardByUserId(userId: number) {
 
 export async function findCardUserById(userId: number, id: number) {
 
-    const cards = await cardRepository.findCardUserById(userId, id);
+    const cards: Cards[] = await cardRepository.findCardUserById(userId, id);
 
     if (!cards.length) {
         throw { code: "NotFound", message: "Cartão não encontrado!" }
     }
 
-    return cards[0];
+    return <Cards> cards[0];
 
 }
 

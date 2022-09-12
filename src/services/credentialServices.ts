@@ -38,7 +38,7 @@ export async function insertCredential(credential: ICredentialsBodyReq, userId: 
 
 }
 
-export async function findCredentialByUrl(credential: ICredentialsBodyReq, userId: number) {
+export async function findCredential(credential: ICredentialsBodyReq, userId: number) {
 
     const payload: ICredentialsFindWithUserId = {
         url: credential.url,
@@ -54,7 +54,7 @@ export async function findCredentialByUrl(credential: ICredentialsBodyReq, userI
     if (credentials.length) {
         throw {
             code: "Conflict",
-            message: "Erro usuário tentando cadastrar duas credenciais iguais"
+            message: "Erro você está tentando cadastrar duas credenciais iguais"
         }
     }
 

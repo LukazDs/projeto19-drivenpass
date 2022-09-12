@@ -14,7 +14,6 @@ export async function validateCardBody (req: Request, res: Response, next: NextF
         
     }
     
-    console.log("sai")
     next()
 
 };

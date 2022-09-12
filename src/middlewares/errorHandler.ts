@@ -18,4 +18,4 @@ const errorHandler: ErrorRequestHandler = (err, _req, res, _next) => {
 
 };
 
-export default errorHandler;
+export default <ErrorRequestHandler> errorHandler;
