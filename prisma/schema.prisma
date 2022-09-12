@@ -48,7 +48,10 @@ model Cards {
   password       String
   isVirtual      Boolean  @default(false)
   typeCard       Role     @default(Debito)
-  user           Users?   @relation(fields: [userId], references: [id])
+  title          String
+  authorName     String
+  label          String
+  user           Users   @relation(fields: [userId], references: [id])
   userId         Int
 }
 
