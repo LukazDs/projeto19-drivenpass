@@ -40,3 +40,10 @@ export async function findWifiUserById(userId: number, id: number) {
     return wifis[0];
 
 }
+
+export async function deleteWifiUserById(id: number, userId: number) {
+
+    await findWifiUserById(userId, id);
+    await wifiRepository.deleteWifiUserById(id);
+
+}

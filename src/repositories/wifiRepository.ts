@@ -24,3 +24,10 @@ export async function findWifiById(userId: number, id: number) {
     return await prisma.wifis.findMany({ where: { userId, id } })
 
 }
+
+
+export async function deleteWifiUserById(id: number) {
+
+    return await prisma.wifis.delete({ where: { id } })
+
+}
