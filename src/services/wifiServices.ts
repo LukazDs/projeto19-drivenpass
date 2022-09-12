@@ -28,3 +28,15 @@ export async function findWifiByUserId(userId: number) {
     return await wifiRepository.findWifiByUserId(userId);
 
 }
+
+export async function findWifiUserById(userId: number, id: number) {
+
+    const wifis = await wifiRepository.findWifiById(userId, id);
+
+    if (!wifis.length) {
+        throw { code: "NotFound", message: "Wifi não encontrado!" }
+    }
+
+    return wifis[0];
+
+}

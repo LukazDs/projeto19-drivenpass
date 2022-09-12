@@ -18,3 +18,9 @@ export async function findWifiByUserId(userId: number) {
     return await prisma.wifis.findMany({ where: { userId } });
 
 }
+
+export async function findWifiById(userId: number, id: number) {
+
+    return await prisma.wifis.findMany({ where: { userId, id } })
+
+}
