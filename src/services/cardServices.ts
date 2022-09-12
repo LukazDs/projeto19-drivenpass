@@ -36,3 +36,9 @@ export async function insertCard(card: ICardBodyReq, userId: number) {
     await cardRepository.insertCard(payload);
 
 }
+
+export async function findCardByUserId(userId: number) {
+
+    return await cardRepository.findCardByUserId(userId);
+
+}
