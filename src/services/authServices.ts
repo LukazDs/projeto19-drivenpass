@@ -24,29 +24,22 @@ export async function findUserByEmail(email: string) {
     const user = await authRepository.findUserByEmail(email);
 
     if (user) {
-        throw { code: "Conflict", "message": "Usuário já Cadastrado!" }
+        throw { code: "Conflict", message: "Usuário já Cadastrado!" }
     }
 
 }
 
-export async function findUserByEmailAndPassword(user: IUser) {
+export async function findUser(user: IUser) {
 
     const register = await authRepository.findUserByEmail(user.email);
 
-    if (!register) {
+    if (!register || !bcrypt.compareSync(user.password, register?.password as string)) {
         throw { code: "Unauthorized", message: "Email ou password inválidos!" }
-    }
-
-    if (!bcrypt.compareSync(user.password, register?.password as string)) {
-
-        throw { code: "Unauthorized", message: "Email ou password inválidos!" }
-
     }
 
     return <Users>register;
 
 }
-
 
 export async function getToken(user: Users) {
 

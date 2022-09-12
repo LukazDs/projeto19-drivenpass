@@ -4,21 +4,21 @@ import { IUser } from "../types/utilTypes";
 
 export async function createUser(req: Request, res: Response) {
 
-    const user: IUser = req.body
+    const user: IUser = req.body;
 
-    await authServices.findUserByEmail(user.email)
-    await authServices.insertUser(user)
+    await authServices.findUserByEmail(user.email);
+    await authServices.insertUser(user);
 
-    res.status(201).send("User Created!")
+    res.status(201).send("User Created!");
 
 }
 
-export async function signInUser(req: Request, res: Response) {
+export async function subscribeUser(req: Request, res: Response) {
 
-    const user: IUser = req.body
+    const user: IUser = req.body;
 
-    const register = await authServices.findUserByEmailAndPassword(user)
-    const token: string = await authServices.getToken(register)
+    const register = await authServices.findUser(user);
+    const token: string = await authServices.getToken(register);
 
     res.status(201).send({ token })
 
