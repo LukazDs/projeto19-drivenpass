@@ -8,7 +8,6 @@ async function validateToken(req: Request, res: Response, next: NextFunction) {
     const verified = jwt.verifyToken(token);
 
     if (!verified) {
-        console.log(token)
         return res.status(401).send('Token inválido!');
     }
 
